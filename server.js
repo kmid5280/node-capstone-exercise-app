@@ -6,8 +6,35 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const {PORT, DATABASE_URL} = require('./config');
 const {WorkoutPost} = require('./models')
+const passport = require('passport')
+
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth')
+
+mongoose.Promise = global.Promise;
 
 app.use(morgan('common'));
+
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE')
+    if (req.method === 'OPTIONS') {
+        return res.send(204)
+    }
+    next();
+})
+
+passport.use(localStrategy);
+passport.use(jwtStrategy)
+//app.use('/api/users/', usersRouter)
+//app.use('/api/users/', usersRouter)
+const jwtAuth = passport.authenticage('jwt', {session: false})
+app.get('/api/protected', jwtAuth, (req, res) => {
+    return res.json({
+        data: 'rosebud'
+    })
+})
 app.use(express.static('public'))
 app.use('/workouts', workoutPostRouter)
 app.use('*', function (req, res) {
@@ -52,4 +79,4 @@ if (require.main === module) {
     runServer(DATABASE_URL).catch(err => console.error(err))
 }
 
-module.exports = {app. runServer, closeServer};
+module.exports = {app, runServer, closeServer};
