@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan')
 const workoutPostRouter = require('./workoutPostRouter');
@@ -7,6 +8,7 @@ mongoose.Promise = global.Promise;
 const {PORT, DATABASE_URL} = require('./config');
 const {WorkoutPost} = require('./models')
 const passport = require('passport')
+
 
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth')
@@ -27,9 +29,7 @@ app.use(function (req, res, next) {
 
 passport.use(localStrategy);
 passport.use(jwtStrategy)
-//app.use('/api/users/', usersRouter)
-//app.use('/api/users/', usersRouter)
-const jwtAuth = passport.authenticage('jwt', {session: false})
+const jwtAuth = passport.authenticate('jwt', {session: false})
 app.get('/api/protected', jwtAuth, (req, res) => {
     return res.json({
         data: 'rosebud'
@@ -37,6 +37,8 @@ app.get('/api/protected', jwtAuth, (req, res) => {
 })
 app.use(express.static('public'))
 app.use('/workouts', workoutPostRouter)
+app.use('/users', usersRouter)
+app.use('/auth', authRouter)
 app.use('*', function (req, res) {
     res.status(404).json({message: 'not found'})
 })
