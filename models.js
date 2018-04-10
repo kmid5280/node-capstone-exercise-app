@@ -22,7 +22,8 @@ const workoutPostSchema = mongoose.Schema({
   workoutType: {type: String, required: true},
   lengthOfTime: {type: Number, required: true},
   details: {type: String, required: false},
-  created: {type: Date, required: false}
+  created: {type: Date, required: false},
+  user: {type: mongoose.Schema.Types.ObjectId, req: 'User', required: true}
 })
 
 workoutPostSchema.methods.serialize = function() {
@@ -31,7 +32,8 @@ workoutPostSchema.methods.serialize = function() {
     workoutType: this.workoutType,
     lengthOfTime: this.lengthOfTime,
     details: this.details,
-    created: this.created
+    created: this.created,
+    user: this.user
   }
 }
 

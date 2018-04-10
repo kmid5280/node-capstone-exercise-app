@@ -3,8 +3,10 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const {WorkoutPost} = require('./models');
+const passport = require('passport')
+const jwtAuth = passport.authenticate('jwt', {session: false})
 
-router.get('/', (req, res) => {
+router.get('/', jwtAuth, (req, res) => {
     WorkoutPost
         .find().exec()
         .then(post => {
@@ -16,8 +18,8 @@ router.get('/', (req, res) => {
         })
 })
 
-router.post('/', jsonParser, (req,res) => {
-    const requiredFields = ['Workout_Type', 'Length_of_Time'];
+router.post('/', jwtAuth, jsonParser, (req,res) => {
+    const requiredFields = ['workoutType', 'lengthOfTime'];
     for (let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -28,8 +30,11 @@ router.post('/', jsonParser, (req,res) => {
     }
     WorkoutPost
         .create({
-            Workout_Type: req.body.Workout_Type,
-            Length_of_Time: req.body.Length_of_Time
+            workoutType: req.body.workoutType,
+            lengthOfTime: req.body.lengthOfTime,
+            details: req.body.details,
+            created: req.body.created || Date.now(),
+            user: req.user.id
         })
         .then(post => res.status(201).json(post.serialize()))
         .catch(err => {
@@ -38,7 +43,7 @@ router.post('/', jsonParser, (req,res) => {
         })
 })
 
-router.delete('/:id', (req,res) => {
+router.delete('/:id', jwtAuth, (req,res) => {
     WorkoutPost
     .findByIdAndRemove(req.params.id)
     .then(() => {
@@ -50,15 +55,17 @@ router.delete('/:id', (req,res) => {
     })
 })
 
-router.put('/:id', jsonParser, (req,res) => {
+router.put('/:id', jwtAuth, jsonParser, (req,res) => {
+    console.log('params', req.params)
+    console.log('request body', req.body)
     if(!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-        res.status(400).json({
+        return res.status(400).json({
             error: "Request path id and request body id values must match"
         })
     }
 
     const updated = {};
-    const updateableFields = ['Workout_Type', 'Length_of_Time']
+    const updateableFields = ['workoutType', 'lengthOfTime', 'details']
     updateableFields.forEach(field => {
         if (field in req.body) {
             updated[field] = req.body[field];
