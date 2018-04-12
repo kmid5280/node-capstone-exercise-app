@@ -12,15 +12,56 @@
         <header role="banner">
             <form class="blog-entry-form">
                 <h2>Please enter your latest workout details!</h2>
-                <input type="text" class="js-blog-entry">
+                <select id="workout-type">
+                    <option>Upper body/arms</option>
+                    <option>Lower body/legs</option>
+                    <option>Cardiovascular</option>
+                    <option>Nothing</option>
+                </select>
+                <br>
+                Additional details: <input type="text" id="workout-details">
+                <p><select id="time-spent">
+                    <option>15 minutes</option>
+                    <option>30 minutes</option>
+                    <option>45 minutes</option>
+                </select>
                 <button class="submit-button">Submit</button>
             </form>
         </header>
     <main role="main" aria-live="assertive">
-        <p>Here are your previous entries.</p>
+        
+        
+        <!-- <hr>
+        <h3 class="workout-entry">March 25th, 2018</h3>
+        <p>Upper body workout</p>
+        30 minutes
+        <button type="button">Update</button>
+        <button type="button">Delete</button>
+        <h3>March 24th, 2018</h3>
+        <p>Bicycling</p>
+        45 minutes
+        <button type="button">Update</button>
+        <button type="button">Delete</button>
+        <h3>March 23rd, 2018</h3>
+        <p>Weight lifting, legs</p>
+        20 minutes
+        <button type="button">Update</button>
+        <button type="button">Delete</button>
+        <br>
+        <button type="button">Previous</button>
+        <button type="button">Next</button>
+        <button type="button">See summary</button>
+        <br>
+        Summary of activity over last 30 days
+        <ul>
+            <li>Total time spent on upper body: 3 hours</li>
+            <li>Total time spent on lower body: 4 hours</li>
+            <li>Total time spent on cardiovascular: 6 hours</li>
+        </ul> -->
+
         <!-- Previous blog entry data will need to be rendered here -->
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="index.js"></script>
+    <script src="dashboard.js"></script>
   </body>
 </html>
