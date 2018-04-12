@@ -5,19 +5,22 @@
         <meta name="viewport" content="width=device-width">
         <meta description="This app enables the user to keep a log of daily workouts">
         <meta keywords="exercise, workout, log, tracker">
-        <title></title>
+        <title>ExerciseLogger - Login</title>
         <link href="index.css" rel="stylesheet" type="text/css" />
     </head>
-    <body>
-        <h2>Welcome to exercise app</h2>
+    <body id="login-body">
+        <h2 class="login-title">ExerciseLogger</h2>
         <header role="banner">
-            <form class="blog-entry-form">
-                <p>Username goes here</p>
-                <input type="text" class="username-entry">
-                <p>Password goes here</p>
-                <input type="text" class="password-entry">
-                <button class="submit-button">Submit</button>
+            <form>
+                <div class="blog-entry-form">
+                    <h3 class="login-username-text">Username</h3>
+                    <input type="text" class="login-username-entry">
+                    <h3 class="login-password-text">Password</h3>
+                    <input type="password" class="login-password-entry">
+                    <button class="login-login-button">Log In</button>
+                </div>
             </form>
+            <p class="login-no-account">Don't have an account? <a href="/signup.html">Sign up</a> or enter DEMOUSER and DEMOPASSWORD to try a demo.</p>
         </header>
     <main role="main" aria-live="assertive">
     </main>
