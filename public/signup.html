@@ -5,22 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <link href="index.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body id="signup-body">
     <header role="banner">Sign up! It's free and only takes a minute.</header>
     <main role="main">
         <form>
-            <p>Choose username</p>
-            <input type="text" class="create-new-username">
-            <p>Choose password</p>
-            <input type="password" class="create-new-password">
-            <p>Confirm password</p>
-            <input type="password" class="confirm-password">
+            <div class="signup-new-username-fields">
+                <p class="signup-new-username-text">Choose username:</p>
+                <input type="text" class="signup-new-username-entry">
+            </div>
+            <div class="signup-new-password-fields">
+                <p class="signup-new-password-text">Choose password:</p>
+                <input type="password" class="signup-new-password-entry">
+            </div>
+            <div class="signup-confirm-password-fields">
+                <p class="signup-confirm-password-text">Confirm password</p>
+                <input type="password" class="signup-confirm-password-entry">
+            </div>
+            <button class="signup-submit-button">Sign Up!</button>
         </form>
         
     </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="signup.js"></script>
     
 </body>
 </html>
