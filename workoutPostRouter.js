@@ -8,7 +8,9 @@ const jwtAuth = passport.authenticate('jwt', {session: false})
 
 router.get('/', jwtAuth, (req, res) => {
     WorkoutPost
-        .find().exec()
+        .find({
+            user: req.user.id
+        }).exec()
         .then(post => {
             res.json(post)
         })
