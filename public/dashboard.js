@@ -23,10 +23,10 @@ function renderWorkoutPosts(data) {
         const renderWorkoutType = data[i].workoutType || '';
         const renderLengthOfTime = data[i].lengthOfTime || '';
         const renderDetails = data[i].details || '';
+        const itemId = data[i]._id;
         const renderDateCreated = data[i].created || Date.now();
-        console.log(renderWorkoutType, renderLengthOfTime, renderDetails)
         $('main').append(`
-        <div class="dashboard-workout-entry">
+        <div class="dashboard-workout-entry" data-post-id=${itemId}>
             <p>Date: ${renderDateCreated}</p>
             <p>Type of Workout: ${renderWorkoutType}</p>
             <p>Amount of time spent: ${renderLengthOfTime} minutes</p>
@@ -35,6 +35,8 @@ function renderWorkoutPosts(data) {
             <button class="dashboard-workout-delete-button">Delete</button>
         </div>
         `)
+        watchForUpdate()
+        watchForDelete(data)
     }
     $('main').html(`
     
@@ -57,22 +59,26 @@ function watchForUpdate() {
     })
 }
 
-function watchForDelete() {
+function watchForDelete(data) {
     $('.dashboard-workout-delete-button').on('click', event => {
         event.preventDefault()
+        const itemId = $('.dashboard-workout-entry').data('post-id')
+        console.log(itemId)
         $.ajax({
-            url: "/workouts/:id",
+            
+            url: "/workouts/",
             method: "DELETE",
             headers: { 'Authorization': 'Bearer ' + token }
         })
-        .done(function(data) {
-            $('main').append(
-                renderWorkoutPosts(data)
+        .done(function() {
+            $('main').html(
+                renderWorkoutPosts()
+                
             )
+            
         })
     })
+    console.log("done function")
 }
 
 getWorkoutPosts()
-watchForUpdate()
-watchForDelete()
