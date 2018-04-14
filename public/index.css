@@ -1,0 +1,123 @@
+#login-body {
+    background-color: #659DBD;
+    
+}
+
+.login-title {
+    color: white;
+    text-align: center;
+    font-family: 'Titan One', cursive;
+    font-size: 48px;
+    text-shadow: 2px 2px black;
+}
+
+.login-subtitle, .login-username-text, .login-password-text {
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.login-form {
+    margin-top: 50px;
+}
+
+.login-username-entry, .login-password-entry {
+    display: block;
+    width: 300px;
+    height: 45px;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 2px 6px 2px;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    /* cannot get username and password entry fields to center */
+
+    
+}
+
+.login-login-button {
+    display: block;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 10px;
+    width: 150px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    color: black;
+}
+
+.login-login-button:hover {
+    background-color: white;
+}
+
+.login-no-account {
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+#signup-body {
+    background-color: #659DBD;
+    font-family: 'Titan One', cursive;
+    color: white;
+    text-shadow: 2px 2px black;
+}
+
+.signup-header {
+    font-size: 36px;
+    text-align: center;
+}
+
+.signup-new-user-fields {
+    display: block;
+    border: 1px solid black;
+    width: 40%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.signup-form {
+    margin-top: 100px;
+}
+
+.signup-new-username-entry, .signup-new-password-entry, .signup-confirm-password-entry {
+    display: block;
+    font-size: 18px;
+    width: 40%;
+    height: 45px;
+    margin-bottom: 5px; /*not working*/
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 6px;
+}
+
+.signup-submit-button {
+    display: block;
+    width: 30%;
+    height: 45px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 5px;
+    background-color: grey;
+    border-color: grey;
+    font-size: 18px;
+}
+
+.signup-submit-button:hover {
+    background-color: white;
+}
+
+.dashboard-workout-entry {
+    border: 1px solid black;
+}
+
+@media only screen and (max-width: 620px) {
+    .signup-new-user-fields, .signup-new-username-entry, .signup-new-password-entry, .signup-confirm-password-entry, .signup-submit-button {
+        width: 80%
+    }
+}

@@ -12,20 +12,21 @@
         <header role="banner">
             <form class="blog-entry-form">
                 <h2>Please enter your latest workout details!</h2>
-                <select id="workout-type">
+                Type of workout: <select id="workout-type">
                     <option>Upper body/arms</option>
                     <option>Lower body/legs</option>
                     <option>Cardiovascular</option>
                     <option>Nothing</option>
                 </select>
+                <p>Amount of time spent: <select id="time-spent">
+                    <option>15</option>
+                    <option>30</option>
+                    <option>45</option>
+                    <option>60</option>
+                </select> minutes
                 <br>
                 Additional details: <input type="text" id="workout-details">
-                <p><select id="time-spent">
-                    <option>15 minutes</option>
-                    <option>30 minutes</option>
-                    <option>45 minutes</option>
-                </select>
-                <button class="submit-button">Submit</button>
+                <button class="dashboard-post-button">Submit</button>
             </form>
         </header>
     <main role="main" aria-live="assertive">
