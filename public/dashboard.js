@@ -3,6 +3,31 @@ if (!token) {
     window.location.href = "/login.html"
 }
 
+function watchForWorkoutPost() {
+    
+    $('.dashboard-post-button').on('click', event => {
+        console.log('watch for workout post')
+        const WORKOUT_URL_ENDPOINT = "/workouts"
+        const workoutType = $('#workout-type').val();
+        const lengthOfTime = $('#time-spent').val();
+        const workoutDetails = $('#workout-details').val();
+        //const totalWorkoutData = {"workoutType": workoutType, "lengthOfTime": lengthOfTime, "details": workoutDetails}
+        const options = {contentType: "application/json", url: WORKOUT_URL_ENDPOINT, data: JSON.stringify(workoutType), data: lengthOfTime, data: JSON.stringify(workoutDetails), dataType: "json", method: "POST", processData: false}
+        console.log(options)
+    })
+    $.ajax(options).done(function(data) {
+        console.log("success")
+        $('main').html(
+            renderWorkoutPosts(data)
+        )
+    })
+    .fail(function() {
+        console.log("fail")
+               
+    })
+
+}
+
 function getWorkoutPosts() {
     $.ajax({
         url: "/workouts",
@@ -32,9 +57,10 @@ function renderWorkoutPosts(data) {
             <p>Amount of time spent: ${renderLengthOfTime} minutes</p>
             <p>Additional Workout Details: ${renderDetails}</p>
             <button class="dashboard-workout-update-button">Edit</button>
-            <button class="dashboard-workout-delete-button">Delete</button>
+            <button class="dashboard-workout-delete-button" data-delete-id=${itemId}>Delete</button>
         </div>
         `)
+        watchForWorkoutPost()
         watchForUpdate()
         watchForDelete(data)
     }
@@ -62,7 +88,7 @@ function watchForUpdate() {
 function watchForDelete(data) {
     $('.dashboard-workout-delete-button').on('click', event => {
         event.preventDefault()
-        const itemId = $('.dashboard-workout-entry').data('post-id')
+        const itemId = $('.dashboard-workout-delete-button').data('delete-id')
         console.log(itemId)
         $.ajax({
             
