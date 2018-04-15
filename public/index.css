@@ -112,12 +112,69 @@
     background-color: white;
 }
 
+#dashboard-body {
+    background-color: #659dbd;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+}
+
+.dashboard-title {
+    color: white;
+    text-shadow: 2px 2px black;
+    font-size: 30px;
+    font-family: 'Titan One', cursive;
+}
+
 .dashboard-workout-entry {
-    border: 1px solid black;
+    border-radius: 6px;
+    background-color: #fbeec1;
+    margin-bottom: 10px;
+    width: 60%;
+}
+
+#workout-type {
+    border-radius: 6px;
+    height: 40px;
+    width: 150px;
+    font-size: 16px;
+}
+
+#time-spent {
+    height: 40px;
+    width: 60px;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+#workout-details {
+    height: 40px;
+    width: 300px;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.dashboard-post-button {
+
 }
 
 @media only screen and (max-width: 620px) {
     .signup-new-user-fields, .signup-new-username-entry, .signup-new-password-entry, .signup-confirm-password-entry, .signup-submit-button {
         width: 80%
     }
+
+    .dashboard-workout-entry {
+        width: 90%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        margin-bottom: 5px;
+    }
+    
+    /*.dashboard-type-of-workout-dropdown, .dashboard-time-spent-dropdown, .dashboard-workout-details-entry*/ .blog-entry-form {
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+
 }

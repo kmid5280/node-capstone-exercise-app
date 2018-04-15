@@ -8,24 +8,30 @@
         <title></title>
         <link href="index.css" rel="stylesheet" type="text/css" />
     </head>
-    <body>
+    <body id="dashboard-body">
         <header role="banner">
             <form class="blog-entry-form">
-                <h2>Please enter your latest workout details!</h2>
-                Type of workout: <select id="workout-type">
+                <h2 class="dashboard-title">Please enter your latest workout details!</h2>
+                <div class="dashboard-type-of-workout-dropdown">Type of workout: <select id="workout-type">
                     <option>Upper body/arms</option>
                     <option>Lower body/legs</option>
                     <option>Cardiovascular</option>
                     <option>Nothing</option>
                 </select>
-                <p>Amount of time spent: <select id="time-spent">
+                </div>
+                <div class="dashboard-time-spent-dropdown">
+                Amount of time spent: <select id="time-spent">
                     <option>15</option>
                     <option>30</option>
                     <option>45</option>
                     <option>60</option>
+                    <option>75</option>
+                    <option>90</option>
                 </select> minutes
-                <br>
-                Additional details: <input type="text" id="workout-details">
+                </div>
+                <div class="dashboard-workout-details-entry">
+                Additional details: <input type="text" id="workout-details" placeholder="Weight lifting, stretching, cycling, etc.">
+                </div>
                 <button class="dashboard-post-button">Submit</button>
             </form>
         </header>
