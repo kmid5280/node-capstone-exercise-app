@@ -80,7 +80,6 @@ function watchForUpdate() {
         const found = workoutData.find(function(item) {
             return itemId === item._id;
         })
-        console.log(found)
         $(event.target).parent().append(`
         <form class="blog-entry-form">
                 
@@ -106,15 +105,15 @@ function watchForUpdate() {
                 </div>
                 <button class="dashboard-update-submit-button">Submit</button>
             </form>`)
-        $('main').on('click', '.dashboard-update-submit-button', event => {
+        $('.dashboard-update-submit-button').on('click', event => {
             event.preventDefault();
             const WORKOUT_URL_ENDPOINT = "/workouts/" + itemId;
-            const workoutType = $('#workout-type-update').val();
-            console.log(workoutType)
-            const lengthOfTime = $('#time-spent-update').val();
-            console.log(lengthOfTime)
-            const workoutDetails = $('#workout-details-update').val();
-            const updateFields = {"workoutType": workoutType, "lengthOfTime": lengthOfTime, "details": workoutDetails}
+            const updateWorkoutType = $('#workout-type-update').val();
+            //console.log(updateWorkoutType)
+            const updateLengthOfTime = $('#time-spent-update').val();
+            //console.log(updateLengthOfTime)
+            const updateWorkoutDetails = $('#workout-details-update').val();
+            const updateFields = {"workoutType": updateWorkoutType, "lengthOfTime": updateLengthOfTime, "details": updateWorkoutDetails}
             const options = {contentType: "application/json", url: WORKOUT_URL_ENDPOINT, data: JSON.stringify(updateFields), dataType: "json", method: "PUT", headers: { 'Authorization': 'Bearer ' + token }, processData: false}
             console.log(options)
              
@@ -123,7 +122,8 @@ function watchForUpdate() {
                     getWorkoutPosts())
                 })
             .fail(function() {
-                console.log('error')
+                console.log('error');
+                
             })
     })
     })
