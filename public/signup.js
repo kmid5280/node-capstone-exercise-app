@@ -1,6 +1,7 @@
 function watchForSignup() {
-    $('.signup-submit-button').on('click', event => {
+    $('.signup-form').on('submit', event => {
     console.log('beginning submit button')
+    event.preventDefault();
     const username = $('.signup-new-username-entry').val();
     const password = $('.signup-new-password-entry').val();
     const confirmPassword = $('.signup-confirm-password-entry').val();
@@ -11,6 +12,7 @@ function watchForSignup() {
         $('main').append(`<p>Passwords must match</p>`)
         console.log("error");
     }
+    console.log(options)
     
     $.ajax(options).done(function(data) {
         $('main').append(`
