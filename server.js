@@ -30,11 +30,7 @@ app.use(function (req, res, next) {
 passport.use(localStrategy);
 passport.use(jwtStrategy)
 const jwtAuth = passport.authenticate('jwt', {session: false})
-app.get('/api/protected', jwtAuth, (req, res) => {
-    return res.json({
-        data: 'rosebud'
-    })
-})
+
 app.use(express.static('public'))
 app.use('/workouts', workoutPostRouter)
 app.use('/users', usersRouter)
