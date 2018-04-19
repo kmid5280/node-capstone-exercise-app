@@ -1,0 +1,10 @@
+language: node_js
+node_js: node
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: X4vgnfHfeIJGhz1HhgMpIM5dnVf3CIiOvrCHKoub6h4/ZQsF5F2VoXPEvp1dSl7Qg3sYDW6aNpzgqKCb05DXsAIi0WCK4W++M+N/rpq/IC2j3wd4LAvUjUtBd4i+yPxzNKtO29d45nQm7OcYfz+oYZtFrHBJArzJDO4kuKTUSpGsvcxVeJ+2CqkX0ITP+zrJPXzt5pWLnIP5BebUtD4TrtwgeThJOPH0wlc7ALxJGTisFTtk/70KCZoHNSdQA/zizpeoZi6XDs3Iub1TzdWggXuvxizz0XPTWMP12ULxqOglA7nh4jq2I7+y54ivfba8YZxngYkxxYEX2XEmaMaaDBkE0aUwsyrYnGmL38XoLy/jY15iyb6YVaW1wDihQ2t4ZTiIZa2vkMsJ64ezcGclelxnGgH10mk9bSXGPMaNxxwxbBUjBlYMfWleTKg80zf9BDC91CB4Vo7xMbIos6K1iMaYc+Q7avMemGO9CtiIVc/mRONXSHKDa8dGUx5LSdAtCBkEAc00FpZwK6mQqw0Ic62b59VoJctraiFMV9LMNomLuUgfJcr70YQuOW3BMR8CrG+gjbFfiIuumVkiIoEqW0Yv92NZ3NgyC5OzKLT1lnj/qgrphoj0fz6DzjAO6XXKWktHs9M3CejFgaZzmJZjf362jEVh36zNO9F72ARdvg0=
+  app: secure-bayou-66763
+  on:
+    repo: kmid5280/node-capstone-exercise-app

@@ -10,7 +10,7 @@ const {TEST_DATABASE_URL} = require('../config');
 
 chai.use(chaiHttp);
 
-function seedBlogPostData() {
+function seedWorkoutPostData() {
     console.info('seeding post data');
     const seedData = [];
     seedData.push(generateWorkoutPostData());
@@ -18,19 +18,19 @@ function seedBlogPostData() {
 }
 
 function generateWorkoutType() {
-    const workoutType = ['Bicycling', 'Weights, Upper Body', 'Weights, Legs']
+    const workoutType = ['Upper body/arms', 'Lower body/legs', 'Cardiovascular']
     return workoutType[Math.floor(Math.random() * workoutType.length)]
 }
 
 function generateLengthOfTime() {
-    const lengthOfTime = ['30 minutes', '15 minutes', '0 minutes']
+    const lengthOfTime = [60, 30, 15]
     return lengthOfTime[Math.floor(Math.random() * lengthOfTime.length)]
 }
 
 function generatePostData() {
     return {
-        Workout_Type = generateWorkoutType(),
-        Length_of_Time = generateLengthOfTime()
+        workoutType = generateWorkoutType(),
+        lengthOfTime = generateLengthOfTime(),
     }
 }
 
@@ -59,7 +59,7 @@ describe('Workout post module', function() {
     it('should return all workout posts', function() {
         let res;
         return chai.request(app)
-            .get('/workout-posts')
+            .get('/workouts')
             .then(function(_res){
                 res = _res;
                 expect(res).to.have.status(200);
@@ -74,7 +74,7 @@ describe('Workout post module', function() {
     it('should return workout posts with right fields', function() {
         let resWorkoutPost;
         return chai.request(app)
-            .get('/workoutposts')
+            .get('/workouts')
             .then(function(res) {
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
@@ -83,14 +83,14 @@ describe('Workout post module', function() {
                 res.body.forEach(function(post) {
                     expect(post).to.be.a('object');
                     expect(post).to.include.keys(
-                        'Workout_Type', 'Length_of_Time');
+                        'workoutType', 'lengthOfTime');
                 })
                 resWorkoutPost = res.body[0];
-                return WorkoutPost.findById(resWorkoutPost._id)
+                return WorkoutPost.findById(res.WorkoutPost._id)
             })
             .then(function(post) {
                 expect(resWorkoutPost._id).to.equal(post.id);
-                expect(resWorkoutPost.Workout_Type).to.equal(post.Workout_Type);
+                expect(resWorkoutPost.workoutType).to.equal(post.workoutType);
                 expect(resWorkoutPost.lengthOfTime).to.equal(post.lengthOfTime)
             })
     })
@@ -98,35 +98,35 @@ describe('Workout post module', function() {
     it('should add a new post', function() {
         const newWorkoutPost = generateWorkoutPostData();
         return chai.request(app)
-            .post('/workoutposts')
+            .post('/workouts')
             .send(newWorkoutPost)
             .then(function(res) {
                 expect(res).to.have.status(201);
                 expect(res).to.be.json;
                 expect(res.body).to.be.a('object');
                 expect(res.body).to.include.keys(
-                    'Workout_Type', 'Length_of_Time');
-                expect(res.body.Workout_Type).to.equal(newWorkoutPost.Workout_Type);
-                expect(res.body.Length_of_Time).to.equal(newWorkoutPost.lengthOfTime)
+                    'workoutType', 'lengthOfTime');
+                expect(res.body.workoutType).to.equal(newWorkoutPost.workoutType);
+                expect(res.body.lengthOfTime).to.equal(newWorkoutPost.lengthOfTime)
                 return WorkoutPost.findById(res.body.id)  
                 
             })
             .then(function(post) {
-                expect(post.Workout_Type).to.equal(newWorkoutPost.Workout_Type)
-                expect(post.Length_of_Time).to.equal(newWorkoutPost.lengthOfTime)
+                expect(post.workoutType).to.equal(newWorkoutPost.workoutType)
+                expect(post.lengthOfTime).to.equal(newWorkoutPost.lengthOfTime)
             })
     })
     it('should update fields you send over', function() {
         const updateData = {
-            Workout_Type: 'new updated workout type',
-            Length_of_Time: 'new updated length of time'
+            workoutType: 'new updated workout type',
+            lengthOfTime: 'new updated length of time'
         }
         return WorkoutPost
             .findOne()
             .then(function(post) {
                 updateData.id = post.id;
                 return chai.request(app)
-                    .put(`/workoutposts/${post.id}`)
+                    .put(`/workouts/${post.id}`)
                     .send(updateData)
             })
             .then(function(res) {
@@ -134,9 +134,25 @@ describe('Workout post module', function() {
                 return WorkoutPost.findById(updateData.id)
             })
             .then(function(post) {
-                expect(post.Workout_Type).to.equal(updateData.Workout_Type);
+                expect(post.workoutType).to.equal(updateData.workoutType);
                 expect(post.lengthOfTime).to.equal(updateData.lengthOfTime)
             })
     })
-    //need to add delete test
-})
+    it('should delete posts you send over', function() {
+    let post;
+
+      return WorkoutPost
+        .findOne()
+        .then(_post => {
+          post = _post;
+          return chai.request(app).delete(`/workouts/${post.id}`);
+        })
+        .then(res => {
+          res.should.have.status(204);
+          return BlogPost.findById(post.id);
+        })
+        .then(_post => {
+          should.not.exist(_post);
+        });
+    });
+});

@@ -81,7 +81,7 @@ function watchForUpdate() {
             return itemId === item._id;
         })
         $(event.target).parent().append(`
-        <form class="blog-entry-form">
+        <form class="blog-entry-form-update">
                 
                 <div class="dashboard-type-of-workout-dropdown">Type of workout: <select id="workout-type-update" value=${found.workoutType}>
                     <option ${found.workoutType == 'Upper body/arms'?"selected":""}>Upper body/arms</option>
@@ -105,7 +105,7 @@ function watchForUpdate() {
                 </div>
                 <button class="dashboard-update-submit-button">Submit</button>
             </form>`)
-        $('.dashboard-update-submit-button').on('click', event => {
+        $('.blog-entry-form-update').on('submit', event => {
             event.preventDefault();
             const WORKOUT_URL_ENDPOINT = "/workouts/" + itemId;
             const updateWorkoutType = $('#workout-type-update').val();
