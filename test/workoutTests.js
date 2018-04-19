@@ -1,20 +1,37 @@
-'user strict';
+'use strict';
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 const expect = chai.expect;
+const {User} = require('../users/models')
 const {WorkoutPost} = require('../models');
 const {app, runServer, closeServer} = require('../server')
 const {TEST_DATABASE_URL} = require('../config');
 
 chai.use(chaiHttp);
 
-function seedWorkoutPostData() {
+function seedUserData() {
+    const data = generateUser();
+    return User.create(data)
+}
+
+function seedWorkoutPostData(user) {
     console.info('seeding post data');
     const seedData = [];
-    seedData.push(generateWorkoutPostData());
+    seedData.push(generateWorkoutPostData(user));
     return WorkoutPost.insertMany(seedData);
+}
+
+function generateUserName() {
+    const username = ['user654321', 'testuser12', 'usertest23']
+    return username[Math.floor(Math.random() * username.length)]
+}
+
+function generatePassword() {
+    const password = ['user654321', 'testuser12', 'usertest23']
+    return 'password12';
+    //return password[Math.floor(Math.random() * password.length)]
 }
 
 function generateWorkoutType() {
@@ -27,10 +44,18 @@ function generateLengthOfTime() {
     return lengthOfTime[Math.floor(Math.random() * lengthOfTime.length)]
 }
 
-function generatePostData() {
+function generateWorkoutPostData(user) {
     return {
+        user: user._id,        
         workoutType: generateWorkoutType(),
-        lengthOfTime: generateLengthOfTime(),
+        lengthOfTime: generateLengthOfTime()
+    }
+}
+
+function generateUser() {
+    return {
+        username: generateUserName(),
+        password: generatePassword()
     }
 }
 
@@ -40,13 +65,30 @@ function tearDownDb() {
 }
 
 describe('Workout post module', function() {
+    let user;
+    let token;
+
     before(function() {
         console.log(TEST_DATABASE_URL)
         return runServer(TEST_DATABASE_URL);
     })
 
     beforeEach(function() {
-        return seedBlogPostData();
+        return seedUserData()
+        .then(_user => {
+            user = _user;
+            return seedWorkoutPostData(user)
+        })
+        .then(function() {
+            return chai.request(app)
+            .post('/auth/login')
+            .send({username: user.username, password: 'password12'})
+            .then(function(res) {
+                token = res.authToken;
+                return;
+            })
+        })
+        
     })
 
     afterEach(function() {
@@ -75,6 +117,7 @@ describe('Workout post module', function() {
         let resWorkoutPost;
         return chai.request(app)
             .get('/workouts')
+            .set('Authorization', 'Bearer ' + token)
             .then(function(res) {
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
@@ -96,9 +139,10 @@ describe('Workout post module', function() {
     })
 
     it('should add a new post', function() {
-        const newWorkoutPost = generateWorkoutPostData();
+        const newWorkoutPost = generateWorkoutPostData(user);
         return chai.request(app)
             .post('/workouts')
+            .set('Authorization', 'Bearer ' + token)
             .send(newWorkoutPost)
             .then(function(res) {
                 expect(res).to.have.status(201);
@@ -127,6 +171,7 @@ describe('Workout post module', function() {
                 updateData.id = post.id;
                 return chai.request(app)
                     .put(`/workouts/${post.id}`)
+                    .set('Authorization', 'Bearer ' + token)
                     .send(updateData)
             })
             .then(function(res) {
@@ -145,7 +190,8 @@ describe('Workout post module', function() {
         .findOne()
         .then(_post => {
           post = _post;
-          return chai.request(app).delete(`/workouts/${post.id}`);
+          return chai.request(app).delete(`/workouts/${post.id}`)
+          .set('Authorization', 'Bearer ' + token);
         })
         .then(res => {
           res.should.have.status(204);
