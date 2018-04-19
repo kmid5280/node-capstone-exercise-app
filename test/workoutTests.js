@@ -29,8 +29,8 @@ function generateLengthOfTime() {
 
 function generatePostData() {
     return {
-        workoutType = generateWorkoutType(),
-        lengthOfTime = generateLengthOfTime(),
+        workoutType: generateWorkoutType(),
+        lengthOfTime: generateLengthOfTime(),
     }
 }
 
