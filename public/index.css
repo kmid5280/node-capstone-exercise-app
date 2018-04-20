@@ -123,13 +123,34 @@
     text-shadow: 2px 2px black;
     font-size: 30px;
     font-family: 'Titan One', cursive;
+    text-align: center;
 }
 
 .dashboard-workout-entry {
     border-radius: 6px;
     background-color: #fbeec1;
     margin-bottom: 10px;
-    width: 60%;
+    width: 80%;
+}
+
+.dashboard-workout-update-button, .dashboard-workout-delete-button, .dashboard-post-button {
+    display: inline-block;
+    margin-top: 10px;
+    width: 150px;
+    height: 45px;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    color: black;
+}
+
+.dashboard-post-button {
+    display: block;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 10px;
 }
 
 #workout-type {
@@ -153,10 +174,6 @@
     font-size: 16px;
 }
 
-.dashboard-post-button {
-
-}
-
 @media only screen and (max-width: 620px) {
     .signup-new-user-fields, .signup-new-username-entry, .signup-new-password-entry, .signup-confirm-password-entry, .signup-submit-button {
         width: 80%
@@ -170,7 +187,16 @@
         margin-bottom: 5px;
     }
     
-    /*.dashboard-type-of-workout-dropdown, .dashboard-time-spent-dropdown, .dashboard-workout-details-entry*/ .blog-entry-form {
+    .dashboard-post-button {
+        width: 80%;
+        display: block;
+        left: 0;
+        right: 0;
+        margin: auto;
+        margin-top: 10px;
+    }
+
+    .blog-entry-form {
         left: 0;
         right: 0;
         margin: auto;

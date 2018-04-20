@@ -22,14 +22,11 @@ function getWorkoutPosts() {
 
 function renderWorkoutPosts(data) {
     $('main').html('');
-    console.log(data)
-    //data.sort()
     for (i=0; i<data.length; i++) {
         const renderWorkoutType = data[i].workoutType || '';
         const renderLengthOfTime = data[i].lengthOfTime || '';
         const renderDetails = data[i].details || '';
         const itemId = data[i]._id;
-        console.log(itemId)
         const renderDateCreated = data[i].created || Date.now();
         $('main').append(`
         <div class="dashboard-workout-entry" id=${itemId}>

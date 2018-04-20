@@ -9,7 +9,6 @@ const {PORT, DATABASE_URL} = require('./config');
 const {WorkoutPost} = require('./models')
 const passport = require('passport')
 
-
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth')
 
