@@ -1,8 +1,8 @@
 # ExerciseLogger
 ## Screenshots of ExerciseLogger
 
-![Screenshot 1](/exerciselogger1.JPG?raw=true "Screenshot 1")
-![Screenshot 2](/exerciselogger2.JPG?raw=true "Screenshot 2")
+![Screenshot 1](/exerciselogger1.jpg?raw=true "Screenshot 1")
+![Screenshot 2](/exerciselogger2.jpg?raw=true "Screenshot 2")
 
 ## Summary
 
