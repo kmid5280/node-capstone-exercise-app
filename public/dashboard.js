@@ -27,7 +27,7 @@ function renderWorkoutPosts(data) {
         const renderLengthOfTime = data[i].lengthOfTime || '';
         const renderDetails = data[i].details || '';
         const itemId = data[i]._id;
-        const renderDateCreated = data[i].created || Date.now();
+        const renderDateCreated = moment(data[i].created).format('LLL') || Date.now();
         $('main').append(`
         <div class="dashboard-workout-entry" id=${itemId}>
             <p>Date: ${renderDateCreated}</p>
@@ -60,7 +60,8 @@ function watchForWorkoutPost() {
         
         
         $.ajax(options).done(function(data) {
-            console.log("success")
+            $(".dashboard-success-message").html(`
+            <p>Post created successfully!</p>`).fadeIn().delay(5000).fadeOut();
             $('main').html(getWorkoutPosts())
         })
     

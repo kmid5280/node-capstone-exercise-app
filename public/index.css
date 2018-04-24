@@ -60,14 +60,14 @@
 
 #signup-body {
     background-color: #659DBD;
-    font-family: 'Titan One', cursive;
-    color: white;
-    text-shadow: 2px 2px black;
 }
 
 .signup-header {
     font-size: 36px;
     text-align: center;
+    font-family: 'Titan One', cursive;
+    color: white;
+    text-shadow: 2px 2px black;
 }
 
 .signup-new-user-fields {
@@ -110,6 +110,11 @@
 
 .signup-submit-button:hover {
     background-color: white;
+}
+
+.signup-back-to-login {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
 }
 
 #dashboard-body {
@@ -194,6 +199,13 @@
         right: 0;
         margin: auto;
         margin-top: 10px;
+    }
+
+    .dashboard-success-message {
+        font-size: 14px;
+        color: white;
+        text-shadow: 2px 2px black;
+        
     }
 
     .blog-entry-form {
