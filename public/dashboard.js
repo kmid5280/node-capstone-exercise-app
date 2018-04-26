@@ -1,6 +1,6 @@
 const token = localStorage.getItem("token")
 if (!token) {
-    window.location.href = "/login.html"
+    window.location.href = "/index.html"
 }
 
 let workoutData = []
@@ -40,6 +40,13 @@ function renderWorkoutPosts(data) {
         `)
  
     }
+}
+
+function watchForLogout() {
+    $('.dashboard-logout-button').on('click', event => {
+        localStorage.removeItem("token")
+        window.location.href = "/index.html"
+    })
 }
 
 function watchForWorkoutPost() {
@@ -153,6 +160,7 @@ function watchForDelete() {
 }
 
 getWorkoutPosts()
+watchForLogout()
 watchForWorkoutPost()
 watchForUpdate()
 watchForDelete()

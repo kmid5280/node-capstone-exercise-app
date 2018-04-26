@@ -131,6 +131,17 @@
     text-align: center;
 }
 
+.dashboard-logout-button {
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    top: 0;
+}
+
+.dashboard-logout-button:active {
+    color: red;
+}
+
 .dashboard-workout-entry {
     border-radius: 6px;
     background-color: #fbeec1;
