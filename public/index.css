@@ -45,8 +45,11 @@
     width: 150px;
     height: 45px;
     border-radius: 10px;
-    background-color: #f1f1f1;
+    background-color: white;
+    border: white;
+    cursor: pointer;
     color: black;
+    font-size: 18px;
 }
 
 .login-login-button:hover {

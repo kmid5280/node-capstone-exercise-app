@@ -53,17 +53,17 @@ function watchForWorkoutPost() {
     
     $('.blog-entry-form').on('submit', event => {
         event.preventDefault();
-        console.log('watch for workout post')
+        
         const WORKOUT_URL_ENDPOINT = "/workouts"
         const workoutType = $('#workout-type').val();
-        console.log(workoutType)
+        
         const lengthOfTime = $('#time-spent').val();
-        console.log(lengthOfTime)
+        
         const workoutDetails = $('#workout-details').val();
         //const totalWorkoutData = {"workoutType": workoutType, "lengthOfTime": lengthOfTime, "details": workoutDetails}
         const postFields = {"workoutType": workoutType, "lengthOfTime": lengthOfTime, "details": workoutDetails}
         const options = {contentType: "application/json", url: WORKOUT_URL_ENDPOINT, data: JSON.stringify(postFields), dataType: "json", method: "POST", headers: { 'Authorization': 'Bearer ' + token }, processData: false}
-        console.log(options)
+        
         
         
         $.ajax(options).done(function(data) {
@@ -115,13 +115,13 @@ function watchForUpdate() {
             event.preventDefault();
             const WORKOUT_URL_ENDPOINT = "/workouts/" + itemId;
             const updateWorkoutType = $('#workout-type-update').val();
-            //console.log(updateWorkoutType)
+            
             const updateLengthOfTime = $('#time-spent-update').val();
-            //console.log(updateLengthOfTime)
+            
             const updateWorkoutDetails = $('#workout-details-update').val();
             const updateFields = {"id": itemId, "workoutType": updateWorkoutType, "lengthOfTime": updateLengthOfTime, "details": updateWorkoutDetails}
             const options = {contentType: "application/json", url: WORKOUT_URL_ENDPOINT, data: JSON.stringify(updateFields), dataType: "json", method: "PUT", headers: { 'Authorization': 'Bearer ' + token }, processData: false}
-            console.log(options)
+            
              
             $.ajax(options).done(function() {
                 $('main').html(
@@ -141,7 +141,7 @@ function watchForDelete() {
     $('main').on('click', '.dashboard-workout-delete-button', event => {
         event.preventDefault()
         const itemId = $(event.target).data('delete-id')
-        console.log(itemId)
+        
         $.ajax({
             
             url: "/workouts/" + itemId,

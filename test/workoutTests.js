@@ -31,7 +31,6 @@ function generateUserName() {
 function generatePassword() {
     const password = ['user654321', 'testuser12', 'usertest23']
     return 'password12';
-    //return password[Math.floor(Math.random() * password.length)]
 }
 
 function generateWorkoutType() {
