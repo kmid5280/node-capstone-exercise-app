@@ -16,31 +16,40 @@
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.login-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .login-form {
+    order: 1;
     margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-username-entry {
+    order: 1
+}
+
+.login-password-entry {
+    order: 2
 }
 
 .login-username-entry, .login-password-entry {
-    display: block;
     width: 300px;
     height: 45px;
     border-radius: 6px;
     font-size: 16px;
     padding: 2px 6px 2px;
-    left: 0;
-    right: 0;
-    margin: auto;
-
-    /* cannot get username and password entry fields to center */
-
     
 }
 
 .login-login-button {
-    display: block;
-    left: 0;
-    right: 0;
-    margin: auto;
+    order: 3;
     margin-top: 10px;
     width: 150px;
     height: 45px;
@@ -194,6 +203,10 @@
 }
 
 @media only screen and (max-width: 620px) {
+    .login-title {
+        font-size: 38px;
+    }
+    
     .signup-new-user-fields, .signup-new-username-entry, .signup-new-password-entry, .signup-confirm-password-entry, .signup-submit-button {
         width: 80%
     }
