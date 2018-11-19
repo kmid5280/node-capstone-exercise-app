@@ -28,7 +28,7 @@ function renderWorkoutPosts(data) {
         const renderDetails = data[i].details || '';
         const itemId = data[i]._id;
         const renderDateCreated = moment(data[i].created).format('LLL') || Date.now();
-        $('main').append(`
+        $('main').prepend(`
         <div class="dashboard-workout-entry" id=${itemId}>
             <p>Date: ${renderDateCreated}</p>
             <p>Type of Workout: ${renderWorkoutType}</p>
@@ -53,18 +53,12 @@ function watchForWorkoutPost() {
     
     $('.blog-entry-form').on('submit', event => {
         event.preventDefault();
-        
         const WORKOUT_URL_ENDPOINT = "/workouts"
         const workoutType = $('#workout-type').val();
-        
         const lengthOfTime = $('#time-spent').val();
-        
         const workoutDetails = $('#workout-details').val();
-        //const totalWorkoutData = {"workoutType": workoutType, "lengthOfTime": lengthOfTime, "details": workoutDetails}
         const postFields = {"workoutType": workoutType, "lengthOfTime": lengthOfTime, "details": workoutDetails}
         const options = {contentType: "application/json", url: WORKOUT_URL_ENDPOINT, data: JSON.stringify(postFields), dataType: "json", method: "POST", headers: { 'Authorization': 'Bearer ' + token }, processData: false}
-        
-        
         
         $.ajax(options).done(function(data) {
             $(".dashboard-success-message").html(`
