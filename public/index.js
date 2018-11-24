@@ -18,9 +18,4 @@ function watchForLogin() {
     })
 }
 
-function renderBlogEntryForm() {
-    $('main').append(`
-    `)
-}
-
 watchForLogin()
